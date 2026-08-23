@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML趣味节奏器</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎵 趣味节奏器 🥁</h1>
+            <p class="subtitle">儿童音乐节奏练习工具</p>
+        </div>
+
+        <!-- 音色选择区 -->
+        <div class="section percussion-section">
+            <h2>🎸 选择打击乐音色</h2>
+            <div class="percussion-selector" id="percussionSelector">
+                <!-- 动态生成 -->
+            </div>
+        </div>
+
+        <!-- 背景音乐选择区 -->
+        <div class="section music-select-section">
+            <h2>🎶 背景音乐选择</h2>
+            <select id="backgroundMusicSelect" class="music-select">
+                <option value="none">无背景音乐</option>
+                <option value="happy">欢乐曲</option>
+                <option value="calm">舒缓曲</option>
+                <option value="upbeat">欢快曲</option>
+                <option value="rhythmic">节奏曲</option>
+            </select>
+        </div>
+
+        <!-- 音符选择区 -->
+        <div class="section note-section">
+            <h2>🎵 选择音符</h2>
+            <div class="preset-templates">
+                <h3>⚡ 快速模板</h3>
+                <div id="presetButtons" class="preset-buttons">
+                    <!-- 动态生成 -->
+                </div>
+            </div>
+            <div class="note-selector" id="noteSelector">
+                <!-- 动态生成 -->
+            </div>
+            <div class="note-combination">
+                <h3>📝 当前节奏模式</h3>
+                <div id="selectedNotes" class="selected-notes">
+                    <span class="empty-state">未选择音符</span>
+                </div>
+
+                <!-- 节奏提示框 -->
+                <div class="rhythm-preview-box">
+                    <h4>🎼 节奏可视化（标准记谱）</h4>
+                    <div id="rhythmPreview" class="rhythm-preview">
+                        <canvas id="rhythmCanvas" width="800" height="200"></canvas>
+                        <div id="rhythmInfo" class="rhythm-info">
+                            <span class="empty-state">选择音符后显示节奏</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button id="clearNotesBtn" class="btn btn-secondary">🗑️ 清空</button>
+                    <button id="playBtn" class="btn btn-primary">▶️ 播放节奏</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 节奏提示面板 -->
+        <div class="section">
+            <h2>节奏提示面板</h2>
+            <div class="rhythm-indicator" id="rhythmIndicator">
+                <div class="sunflower">
+                    <div class="petal petal-1"></div>
+                    <div class="petal petal-2"></div>
+                    <div class="petal petal-3"></div>
+                    <div class="petal petal-4"></div>
+                    <div class="petal petal-5"></div>
+                    <div class="petal petal-6"></div>
+                    <div class="center"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 互动评分区 -->
+        <div class="section">
+            <h2>互动评分</h2>
+            <div class="interaction-area">
+                <button id="interactBtn" class="btn btn-large">点击打击 (空格键)</button>
+                <div id="scoreDisplay" class="score-display">
+                    <div class="score-value">-</div>
+                    <div class="score-feedback">准备好了吗？</div>
+                </div>
+                <div id="statsDisplay" class="stats-display">
+                    <div class="stat-item">
+                        <span class="stat-label">总尝试次数</span>
+                        <span class="stat-value" id="totalAttempts">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">最高分</span>
+                        <span class="stat-value" id="bestScore">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">平均分</span>
+                        <span class="stat-value" id="averageScore">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 音乐上传区 -->
+        <div class="section">
+            <h2>上传音乐文件</h2>
+            <div class="music-upload">
+                <input type="file" id="musicUpload" accept="audio/*">
+                <button id="uploadBtn" class="btn btn-secondary">上传</button>
+                <div id="musicInfo" class="music-info">
+                    <span class="empty-state">未上传音乐</span>
+                </div>
+                <div class="music-controls">
+                    <button id="playMusicBtn" class="btn btn-secondary" disabled>播放音乐</button>
+                    <button id="stopMusicBtn" class="btn btn-secondary" disabled>停止</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/audio-engine.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
+
