@@ -1,0 +1,963 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Comic Sans MS', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #FF6B9D 0%, #FFC75F 50%, #845EC2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: linear-gradient(to bottom, #FFFACD 0%, #FFFFFF 100%);
+    border-radius: 30px;
+    padding: 40px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25), 0 0 40px rgba(255, 107, 157, 0.15);
+    border: 5px solid #FFD700;
+    position: relative;
+    z-index: 1;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+h1 {
+    text-align: center;
+    background: linear-gradient(135deg, #FF6B9D, #FFC75F, #845EC2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+    font-size: 3.5em;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+    animation: slideDown 0.6s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.subtitle {
+    color: #666;
+    font-size: 1.2em;
+    font-weight: 700;
+    letter-spacing: 1px;
+    animation: fadeIn 0.8s ease-out 0.2s both;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+h2 {
+    color: #FF6B9D;
+    margin-bottom: 20px;
+    font-size: 1.6em;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+h3 {
+    color: #845EC2;
+    margin-bottom: 15px;
+    font-size: 1.15em;
+    font-weight: 700;
+}
+
+.section {
+    margin-bottom: 40px;
+    padding: 25px;
+    background: linear-gradient(135deg, #F0F9FF 0%, #FFF5E6 100%);
+    border-radius: 20px;
+    border-left: 6px solid #FF6B9D;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.percussion-section {
+    border-left-color: #FFC75F;
+}
+
+.music-select-section {
+    border-left-color: #845EC2;
+}
+
+.note-section {
+    border-left-color: #FF6B9D;
+}
+
+/* 背景音乐选择 */
+.music-select {
+    width: 100%;
+    padding: 15px;
+    font-size: 1em;
+    border: 3px solid #FFD700;
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.music-select:hover {
+    border-color: #FFC75F;
+    box-shadow: 0 4px 12px rgba(255, 199, 95, 0.3);
+}
+
+.music-select:focus {
+    outline: none;
+    border-color: #FF6B9D;
+    box-shadow: 0 4px 12px rgba(255, 107, 157, 0.3);
+}
+
+/* 按钮组 */
+.button-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+/* 按钮样式 */
+.btn {
+    padding: 15px 25px;
+    border: 3px solid transparent;
+    border-radius: 15px;
+    font-size: 1.05em;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15), 0 0 20px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: left 0.3s ease;
+    z-index: -1;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #FF6B9D, #FF8E8E);
+    color: white;
+    border-color: #E63946;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #E63946, #FF6B9D);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(255, 107, 157, 0.5), 0 0 30px rgba(255, 107, 157, 0.2);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #FFC75F, #FFD700);
+    color: #333;
+    border-color: #FF9500;
+    font-weight: 700;
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(135deg, #FF9500, #FFC75F);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(255, 149, 0, 0.4), 0 0 30px rgba(255, 149, 0, 0.2);
+}
+
+.btn-large {
+    padding: 25px 50px;
+    font-size: 1.3em;
+    background: linear-gradient(135deg, #845EC2, #B565D8);
+    color: white;
+    width: 100%;
+    margin-bottom: 20px;
+    border-color: #7B2CBF;
+}
+
+.btn-large:hover {
+    background: linear-gradient(135deg, #7B2CBF, #845EC2);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(132, 94, 194, 0.5), 0 0 40px rgba(132, 94, 194, 0.2);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* 音色选择器 */
+.percussion-selector {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.percussion-btn {
+    padding: 20px;
+    border: 4px solid #ddd;
+    border-radius: 18px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1em;
+    text-align: center;
+    font-weight: 600;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.percussion-btn:hover {
+    border-color: #FFC75F;
+    background: #FFFACD;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(255, 199, 95, 0.3);
+}
+
+.percussion-btn.active {
+    background: linear-gradient(135deg, #FFC75F, #FFD700);
+    color: #333;
+    border-color: #FF9500;
+    box-shadow: 0 10px 25px rgba(255, 149, 0, 0.4);
+    transform: scale(1.08);
+}
+
+/* 预设模板 */
+.preset-templates {
+    margin-bottom: 25px;
+    padding: 20px;
+    background: linear-gradient(135deg, #F0F9FF, #FFF5E6);
+    border-radius: 15px;
+    border: 3px dashed #845EC2;
+}
+
+.preset-templates h3 {
+    margin-bottom: 15px;
+    color: #845EC2;
+    font-size: 1.1em;
+}
+
+.preset-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 15px;
+}
+
+.preset-btn {
+    padding: 15px;
+    border: 3px solid #845EC2;
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.95em;
+    text-align: center;
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(132, 94, 194, 0.1);
+}
+
+.preset-btn:hover {
+    border-color: #B565D8;
+    background: linear-gradient(135deg, #F5E6FF, #E6D9FF);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(181, 101, 216, 0.3);
+}
+
+.preset-btn.active {
+    background: linear-gradient(135deg, #845EC2, #B565D8);
+    color: white;
+    border-color: #7B2CBF;
+    box-shadow: 0 8px 20px rgba(132, 94, 194, 0.4);
+}
+
+/* 音符选择器 */
+.note-selector {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.note-btn {
+    padding: 15px;
+    border: 3px solid #ddd;
+    border-radius: 15px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    font-size: 0.95em;
+    font-weight: 700;
+    text-align: center;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1), 0 0 15px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.note-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.note-btn.selected {
+    color: white;
+    border-width: 4px;
+    transform: scale(1.08);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.3), 0 0 25px rgba(0, 0, 0, 0.15);
+}
+
+/* 音符颜色方案 */
+.note-btn[data-note="whole"] {
+    background: linear-gradient(135deg, #52B788, #74C69D);
+    border-color: #2D6A4F;
+}
+
+.note-btn[data-note="whole"].selected {
+    background: linear-gradient(135deg, #2D6A4F, #52B788);
+    border-color: #1B4332;
+}
+
+.note-btn[data-note="half"] {
+    background: linear-gradient(135deg, #4D96FF, #74B9FF);
+    border-color: #0066FF;
+}
+
+.note-btn[data-note="half"].selected {
+    background: linear-gradient(135deg, #0066FF, #4D96FF);
+    border-color: #003D99;
+}
+
+.note-btn[data-note="quarter"] {
+    background: linear-gradient(135deg, #FFB84D, #FFD700);
+    border-color: #FF9500;
+}
+
+.note-btn[data-note="quarter"].selected {
+    background: linear-gradient(135deg, #FF9500, #FFB84D);
+    border-color: #FF7700;
+}
+
+.note-btn[data-note="eighth"] {
+    background: linear-gradient(135deg, #B565D8, #D896FF);
+    border-color: #7B2CBF;
+}
+
+.note-btn[data-note="eighth"].selected {
+    background: linear-gradient(135deg, #7B2CBF, #B565D8);
+    border-color: #5A189A;
+}
+
+.note-btn[data-note="sixteenth"] {
+    background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+    border-color: #E63946;
+}
+
+.note-btn[data-note="sixteenth"].selected {
+    background: linear-gradient(135deg, #E63946, #FF6B6B);
+    border-color: #A4161A;
+}
+
+/* 已选音符 */
+.note-combination {
+    margin-top: 20px;
+}
+
+.selected-notes {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    min-height: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.note-tag {
+    background: #667eea;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.note-tag .remove {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.empty-state {
+    color: #999;
+    font-style: italic;
+}
+
+/* 节奏提示框 */
+.rhythm-preview-box {
+    background: linear-gradient(135deg, #F0F9FF, #FFF5E6);
+    border: 3px solid #FF6B9D;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 8px 16px rgba(255, 107, 157, 0.15);
+}
+
+.rhythm-preview-box h4 {
+    color: #FF6B9D;
+    margin-bottom: 12px;
+    font-size: 1em;
+    font-weight: 700;
+}
+
+.rhythm-preview {
+    background: white;
+    border: 2px dashed #845EC2;
+    border-radius: 12px;
+    padding: 20px;
+    min-height: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.rhythm-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 1.8em;
+    font-weight: 700;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    position: relative;
+    border: 3px solid;
+}
+
+/* 根据音符时长设置宽度和高度 */
+.rhythm-note.duration-whole {
+    width: 100px;
+    height: 80px;
+    background: linear-gradient(135deg, #52B788, #74C69D);
+    border-color: #2D6A4F;
+}
+
+.rhythm-note.duration-half {
+    width: 80px;
+    height: 70px;
+    background: linear-gradient(135deg, #4D96FF, #74B9FF);
+    border-color: #0066FF;
+}
+
+.rhythm-note.duration-quarter {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #FFB84D, #FFD700);
+    border-color: #FF9500;
+}
+
+.rhythm-note.duration-eighth {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #B565D8, #D896FF);
+    border-color: #7B2CBF;
+}
+
+.rhythm-note.duration-sixteenth {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+    border-color: #E63946;
+}
+
+.rhythm-note:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* 节奏Canvas容器 */
+#rhythmCanvas {
+    background: white;
+    border: 2px solid #FFB6C1;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto;
+    box-shadow: 0 2px 8px rgba(255, 182, 193, 0.2);
+    max-width: 100%;
+    height: auto;
+}
+
+/* 节奏信息 */
+#rhythmInfo {
+    margin-top: 12px;
+}
+
+/* 错误状态 */
+.error-state {
+    color: #FF6B6B;
+    font-weight: bold;
+}
+
+/* 连音线（Tuplet）样式 */
+.tuplet-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 12px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px dashed rgba(0, 0, 0, 0.2);
+    position: relative;
+    margin: 0 4px;
+}
+
+/* 三连音样式 */
+.tuplet-group.tuplet-triplet {
+    background: rgba(180, 101, 216, 0.1);
+    border-color: rgba(180, 101, 216, 0.4);
+}
+
+/* 四连音样式 */
+.tuplet-group.tuplet-quadruplet {
+    background: rgba(255, 107, 107, 0.1);
+    border-color: rgba(255, 107, 107, 0.4);
+}
+
+/* 连音标签 */
+.tuplet-label {
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+    margin-left: 4px;
+    padding: 2px 6px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.tuplet-group.tuplet-triplet .tuplet-label {
+    color: #B465D8;
+    background: rgba(180, 101, 216, 0.2);
+    border-color: #B465D8;
+}
+
+.tuplet-group.tuplet-quadruplet .tuplet-label {
+    color: #FF6B6B;
+    background: rgba(255, 107, 107, 0.2);
+    border-color: #FF6B6B;
+}
+
+/* 节拍信息 */
+.beat-info {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+    padding: 10px 15px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid rgba(255, 182, 193, 0.3);
+}
+
+.beat-count {
+    color: #333;
+}
+
+.beat-status {
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.beat-status.valid {
+    color: #27AE60;
+    background: rgba(39, 174, 96, 0.2);
+    border: 1px solid #27AE60;
+}
+
+.beat-status.invalid {
+    color: #E74C3C;
+    background: rgba(231, 76, 60, 0.2);
+    border: 1px solid #E74C3C;
+}
+
+/* 节奏预览容器 - VexFlow五线谱 */
+#rhythmPreview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 250, 240, 0.95));
+    border: 3px solid #FFB6C1;
+    border-radius: 15px;
+    min-height: 280px;
+    position: relative;
+}
+
+/* 节奏提示面板 */
+.rhythm-indicator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 280px;
+    background: linear-gradient(135deg, #FFF9E6, #FFFACD);
+    border-radius: 20px;
+    border: 4px solid #FFD700;
+    box-shadow: inset 0 4px 12px rgba(255, 215, 0, 0.2), 0 8px 20px rgba(255, 215, 0, 0.1);
+}
+
+.sunflower {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+}
+
+.petal {
+    position: absolute;
+    width: 38px;
+    height: 75px;
+    background: linear-gradient(135deg, #FFD700, #FFC75F);
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform-origin: 0 0;
+    opacity: 0.85;
+    transition: all 0.15s ease;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.petal-1 { transform: translate(-19px, -95px) rotate(0deg); }
+.petal-2 { transform: translate(-19px, -95px) rotate(60deg); }
+.petal-3 { transform: translate(-19px, -95px) rotate(120deg); }
+.petal-4 { transform: translate(-19px, -95px) rotate(180deg); }
+.petal-5 { transform: translate(-19px, -95px) rotate(240deg); }
+.petal-6 { transform: translate(-19px, -95px) rotate(300deg); }
+
+.petal.active {
+    opacity: 1;
+    background: linear-gradient(135deg, #FF6B9D, #FF8E8E);
+    transform: translate(-19px, -95px) rotate(var(--rotation)) scale(1.35);
+    box-shadow: 0 10px 24px rgba(255, 107, 157, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.4);
+}
+
+.center {
+    position: absolute;
+    width: 55px;
+    height: 55px;
+    background: linear-gradient(135deg, #8B4513, #A0522D);
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25), inset 0 2px 4px rgba(255, 255, 255, 0.2);
+}
+
+/* 互动评分区 */
+.interaction-area {
+    background: linear-gradient(135deg, #F0F9FF, #FFF5E6);
+    padding: 30px;
+    border-radius: 20px;
+    border: 3px solid #FF6B9D;
+    box-shadow: 0 8px 20px rgba(255, 107, 157, 0.15), 0 0 30px rgba(255, 107, 157, 0.05);
+}
+
+.score-display {
+    text-align: center;
+    margin-top: 25px;
+    padding: 25px;
+    background: linear-gradient(135deg, #FFFFFF, #FFFACD);
+    border-radius: 15px;
+    border: 3px dashed #FFD700;
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.15);
+}
+
+.score-value {
+    font-size: 4.5em;
+    font-weight: 900;
+    background: linear-gradient(135deg, #FF6B9D, #FFC75F);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+    animation: pulse 0.6s ease-in-out;
+    letter-spacing: 2px;
+}
+
+.score-feedback {
+    font-size: 1.4em;
+    color: #333;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+}
+
+/* 统计信息 */
+.stats-display {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 20px;
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 4px solid #FFD700;
+}
+
+.stat-item {
+    background: linear-gradient(135deg, #FFFACD, #FFF9E6);
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    border: 3px solid #FFC75F;
+    box-shadow: 0 8px 16px rgba(255, 199, 95, 0.2), 0 0 20px rgba(255, 199, 95, 0.05);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(255, 199, 95, 0.3), 0 0 30px rgba(255, 199, 95, 0.1);
+}
+
+.stat-item:hover::before {
+    opacity: 1;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.95em;
+    color: #666;
+    margin-bottom: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.stat-value {
+    display: block;
+    font-size: 2.4em;
+    font-weight: 900;
+    background: linear-gradient(135deg, #FF6B9D, #845EC2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* 音乐上传区 */
+.music-upload {
+    background: linear-gradient(135deg, #F0F9FF, #FFF5E6);
+    padding: 25px;
+    border-radius: 20px;
+    border: 3px dashed #845EC2;
+}
+
+#musicUpload {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 3px dashed #845EC2;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.music-info {
+    background: linear-gradient(135deg, #F5E6FF, #E6D9FF);
+    padding: 20px;
+    border-radius: 12px;
+    margin: 15px 0;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    border: 2px solid #B565D8;
+    font-weight: 600;
+}
+
+.music-controls {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.music-controls .btn {
+    flex: 1;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    h1 {
+        font-size: 2.2em;
+    }
+
+    .subtitle {
+        font-size: 1em;
+    }
+
+    .percussion-selector {
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+        gap: 15px;
+    }
+
+    .note-selector {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 12px;
+    }
+
+    .btn {
+        padding: 12px 20px;
+        font-size: 0.95em;
+    }
+
+    .btn-large {
+        padding: 20px 30px;
+        font-size: 1.1em;
+    }
+
+    .sunflower {
+        width: 140px;
+        height: 140px;
+    }
+
+    .score-value {
+        font-size: 3em;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .button-group .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    .section {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        font-size: 1.2em;
+    }
+
+    .percussion-selector {
+        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+        gap: 10px;
+    }
+
+    .note-selector {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+        gap: 10px;
+    }
+
+    .preset-buttons {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 10px;
+    }
+
+    .btn {
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
+
+    .sunflower {
+        width: 120px;
+        height: 120px;
+    }
+
+    .score-value {
+        font-size: 2.5em;
+    }
+
+    .stat-item {
+        padding: 15px;
+    }
+
+    .stat-value {
+        font-size: 1.8em;
+    }
+}
+
