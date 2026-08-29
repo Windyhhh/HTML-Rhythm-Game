@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🎮 HTML-Rhythm-Game
+# 网页节奏游戏 | HTML-Rhythm-Game
 
 ### A pure-frontend rhythm game with Web Audio & Canvas sheet music.
 
